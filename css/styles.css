@@ -69,8 +69,9 @@ section {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 80px 20px 60px;
-    background: linear-gradient(180deg, rgba(10, 17, 40, 0.5) 0%, var(--bg-sky) 100%);
+    padding: 120px 20px 100px;
+    background: linear-gradient(180deg, rgba(10, 17, 40, 0.7) 0%, rgba(10, 17, 40, 0.9) 100%), url('../assets/images/fundoSectionHero.png') no-repeat center center;
+    background-size: cover;
 }
 
 #hero h1 {
