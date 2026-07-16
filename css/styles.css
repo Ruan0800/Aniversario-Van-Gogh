@@ -1,0 +1,401 @@
+/* ==========================================
+   1. CONFIGURAÇÕES GERAIS E PALETA DE CORES
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap');
+
+:root {
+    --bg-sky: #0a1128;
+    /* Azul escuro profundo (Noite) */
+    --bg-card: #101f42;
+    /* Azul um pouco mais claro para contraste de blocos */
+    --gold: #f39c12;
+    /* Dourado para detalhes e botões de destaque */
+    --gold-light: #f1c40f;
+    /* Dourado brilhante para hover e estrelas */
+    --text-white: #ffffff;
+    /* Texto principal */
+    --text-muted: #bdc3c7;
+    /* Texto secundário/apoio */
+    --font-title: 'Cinzel', serif;
+    /* Elegante e clássica para títulos */
+    --font-body: 'Montserrat', sans-serif;
+    /* Moderna e limpa para leitura */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-sky);
+    color: var(--text-white);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    /* Fundo simulando poeira estelar suave */
+    /* background-image:
+        radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 30px);
+    background-size: 550px 550px, 350px 350px;
+    background-position: 0 0, 40px 60px; */
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-title);
+    text-align: center;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+section {
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(243, 156, 18, 0.15);
+    /* Divisor sutil em dourado */
+}
+
+/* ==========================================
+   2. HERO / BOAS-VINDAS (Topo do Convite)
+   ========================================== */
+#hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px 60px;
+    background: linear-gradient(180deg, rgba(10, 17, 40, 0.5) 0%, var(--bg-sky) 100%);
+}
+
+#hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+}
+
+#hero p {
+    font-size: 1.2rem;
+    color: var(--text-white);
+    max-width: 600px;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+/* Contador */
+#countdown {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Estilização que você adicionará dinamicamente via JS */
+.countdown-item {
+    background: var(--bg-card);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 15px 20px;
+    min-width: 80px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.countdown-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gold-light);
+    display: block;
+}
+
+.countdown-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   3. LOCALIZAÇÃO
+   ========================================== */
+#localizacao {
+    text-align: center;
+}
+
+#localizacao h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#localizacao p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.buttons a,
+.opcoes-presentes button,
+#form-mensagem button,
+#btn-upload {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: transparent;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    border-radius: 25px;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.buttons a:hover,
+.opcoes-presentes button:hover,
+#form-mensagem button:hover,
+#btn-upload:hover {
+    background-color: var(--gold);
+    color: var(--bg-sky);
+    box-shadow: 0 0 15px var(--gold);
+}
+
+/* ==========================================
+   4. PROGRAMAÇÃO DA NOITE (Linha do Tempo)
+   ========================================== */
+#programacao h2 {
+    margin-bottom: 40px;
+}
+
+.timeline {
+    list-style: none;
+    position: relative;
+    padding-left: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Linha vertical esquerda */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background: var(--gold);
+}
+
+.timeline li {
+    position: relative;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+/* Indicador redondo brilhante */
+.timeline li::before {
+    content: '';
+    position: absolute;
+    left: -27px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    box-shadow: 0 0 8px var(--gold-light);
+}
+
+.timeline li span {
+    font-weight: bold;
+    color: var(--gold-light);
+    margin-right: 15px;
+}
+
+/* ==========================================
+   5. SUGESTÕES DE PRESENTES
+   ========================================== */
+#presentes {
+    text-align: center;
+}
+
+#presentes h2 {
+    margin-bottom: 30px;
+}
+
+.opcoes-presentes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* ==========================================
+   6. MURAL (Deixe sua Estrela no Céu)
+   ========================================== */
+#mural h2 {
+    margin-bottom: 30px;
+}
+
+#form-mensagem {
+    background-color: var(--bg-card);
+    border: 1px solid rgba(243, 156, 18, 0.3);
+    padding: 30px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    margin-bottom: 40px;
+}
+
+#form-mensagem input,
+#form-mensagem textarea {
+    background-color: rgba(10, 17, 40, 0.6);
+    border: 1px solid rgba(243, 156, 18, 0.2);
+    border-radius: 6px;
+    padding: 12px 15px;
+    color: var(--text-white);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#form-mensagem input:focus,
+#form-mensagem textarea:focus {
+    border-color: var(--gold-light);
+}
+
+#form-mensagem textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#form-mensagem button {
+    align-self: center;
+}
+
+/* Feed / Cards de Mensagem */
+#feed-mensagens {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.card-mensagem {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(16, 31, 66, 0.6) 100%);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-mensagem h4 {
+    font-family: var(--font-title);
+    color: var(--gold-light);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.card-musica {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.card-texto {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* ==========================================
+   7. GALERIA DE FOTOS
+   ========================================== */
+#galeria {
+    text-align: center;
+}
+
+#galeria h2 {
+    margin-bottom: 20px;
+}
+
+#btn-upload {
+    margin-bottom: 40px;
+}
+
+.grid-fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+/* Se as fotos forem adicionadas, elas ganham essa moldura elegante */
+.grid-fotos img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid rgba(243, 156, 18, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.grid-fotos img:hover {
+    transform: scale(1.05);
+    border-color: var(--gold-light);
+}
+
+/* ==========================================
+   8. FOOTER
+   ========================================== */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-family: var(--font-title);
+    letter-spacing: 1px;
+}
+
+/* ==========================================
+   9. RESPONSIVIDADE
+   ========================================== */
+@media (max-width: 600px) {
+    #hero h1 {
+        font-size: 2.2rem;
+    }
+
+    #hero p {
+        font-size: 1rem;
+    }
+
+    #countdown {
+        gap: 10px;
+    }
+
+    .countdown-item {
+        padding: 10px 12px;
+        min-width: 65px;
+    }
+
+    .countdown-number {
+        font-size: 1.5rem;
+    }
+
+    .opcoes-presentes {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+}
