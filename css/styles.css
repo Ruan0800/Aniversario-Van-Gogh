@@ -77,16 +77,35 @@ section {
 }
 
 #hero h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+    font-family: var(--font-cursive);
+    font-size: 4rem;
+    line-height: 1.2;
+    color: var(--gold);
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: normal;
+    margin-bottom: 5px;
+    text-shadow: 0 0 15px rgba(243, 156, 18, 0.4);
+}
+
+#hero h2 {
+    font-family: var(--font-cursive);
+    font-size: 3.2rem;
+    line-height: 1.2;
+    color: var(--text-white);
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: normal;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    background: none;
+    -webkit-text-fill-color: var(--text-white);
 }
 
 #hero p {
     font-size: 1.2rem;
     color: var(--text-white);
     max-width: 600px;
-    margin-bottom: 40px;
     font-style: italic;
 }
 
@@ -95,7 +114,7 @@ section {
     display: flex;
     gap: 20px;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 /* Estilização que você adicionará dinamicamente via JS */
@@ -215,6 +234,7 @@ section {
     0% {
         transform: translateY(0) rotate(0deg);
     }
+
     100% {
         transform: translateY(-10px) rotate(1deg);
     }
@@ -226,7 +246,7 @@ section {
     border: 1px solid var(--gold);
     border-radius: 20px;
     padding: 40px 30px;
-    width: 100%;
+    width: 95%;
     max-width: 600px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -237,7 +257,6 @@ section {
 
 .card-title {
     font-family: var(--font-cursive);
-    font-size: 3rem;
     color: var(--text-white);
     margin-bottom: 10px;
     text-transform: none;
@@ -350,54 +369,109 @@ section {
 }
 
 /* ==========================================
-   4. PROGRAMAÇÃO DA NOITE (Linha do Tempo)
+   4. PROGRAMAÇÃO DA NOITE
    ========================================== */
-#programacao h2 {
-    margin-bottom: 40px;
+#programacao {
+    position: relative;
+    background-color: #E9ECEF; /* Fundo cinza claro/azul suave da inspiração */
+    padding: 80px 20px;
+    overflow: hidden; /* Garante que os ventos decorativos não criem barra de rolagem */
+    border-bottom: 1px solid rgba(243, 156, 18, 0.15);
 }
 
-.timeline {
-    list-style: none;
-    position: relative;
-    padding-left: 30px;
-    max-width: 500px;
+#programacao-title {
+    font-family: var(--font-cursive);
+    font-size: 2.5rem;
+    color: #1b2a4a; /* Azul marinho escuro */
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.programacao-container {
+    max-width: 600px;
     margin: 0 auto;
-}
-
-/* Linha vertical esquerda */
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: 5px;
-    bottom: 5px;
-    width: 2px;
-    background: var(--gold);
-}
-
-.timeline li {
     position: relative;
-    margin-bottom: 25px;
-    font-size: 1.1rem;
+    z-index: 2; /* Fica acima dos ventos decorativos */
 }
 
-/* Indicador redondo brilhante */
-.timeline li::before {
-    content: '';
+/* Ventos de Van Gogh Decorativos */
+.wind-decor {
     position: absolute;
-    left: -27px;
-    top: 6px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--gold-light);
-    box-shadow: 0 0 8px var(--gold-light);
+    width: 150px;
+    pointer-events: none;
+    opacity: 0.9;
+    z-index: 1;
 }
 
-.timeline li span {
-    font-weight: bold;
-    color: var(--gold-light);
-    margin-right: 15px;
+.wind-left {
+    bottom: -10px;
+    left: -10px;
+}
+
+.wind-right {
+    bottom: -15px;
+    right: -10px;
+}
+
+/* Lista de Eventos em Formato de Balões/Pills */
+.programacao-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.programacao-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 460px;
+    background-color: #1a2f56; /* Azul escuro da noite */
+    border: 1.5px solid rgba(243, 156, 18, 0.25);
+    border-radius: 40px;
+    padding: 16px 28px;
+    box-shadow: 0 6px 15px rgba(10, 17, 40, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.programacao-pill:hover {
+    transform: translateY(-2.5px);
+    box-shadow: 0 8px 22px rgba(10, 17, 40, 0.25);
+    border-color: var(--gold-light);
+}
+
+.pill-time {
+    font-family: var(--font-title);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--gold);
+    min-width: 60px;
+    text-align: right;
+}
+
+.pill-divider {
+    width: 1.5px;
+    height: 22px;
+    background-color: var(--gold);
+    margin: 0 20px;
+    opacity: 0.65;
+}
+
+.pill-event {
+    font-family: var(--font-title);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    flex-grow: 1;
+    text-align: left;
 }
 
 /* ==========================================
@@ -533,6 +607,8 @@ section {
     border-color: var(--gold-light);
 }
 
+
+
 /* ==========================================
    8. FOOTER
    ========================================== */
@@ -549,25 +625,43 @@ footer {
    9. RESPONSIVIDADE
    ========================================== */
 @media (max-width: 600px) {
+    #hero {
+        padding: 50px 15px 40px;
+    }
+
     #hero h1 {
+        font-size: 2.5rem;
+        line-height: 1.1;
+        margin-bottom: 2px;
+    }
+
+    #hero h2 {
         font-size: 2.2rem;
+        line-height: 1.1;
+        margin-bottom: 15px;
     }
 
     #hero p {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        margin-bottom: 20px;
     }
 
     #countdown {
-        gap: 10px;
+        gap: 8px;
     }
 
     .countdown-item {
-        padding: 10px 12px;
-        min-width: 65px;
+        padding: 8px 6px;
+        min-width: 58px;
     }
 
     .countdown-number {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+    }
+
+    .countdown-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.5px;
     }
 
     .opcoes-presentes {
@@ -586,19 +680,19 @@ footer {
     }
 
     .welcome-title {
-        font-size: 2.8rem;
-        text-align: center;
+        font-size: 2rem;
+        text-align: left;
     }
 
     .welcome-subtitle {
         font-size: 2rem;
-        text-align: center;
+        text-align: left;
         margin-bottom: 20px;
     }
 
     .welcome-text {
-        text-align: center;
-        font-size: 0.85rem;
+        text-align: left;
+        font-size: 0.7rem;
     }
 
     .estrela-lua-img {
@@ -614,11 +708,62 @@ footer {
     }
 
     .card-time {
-        font-size: 2.8rem;
+        font-size: 2.6rem;
     }
 
     .card-address {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         letter-spacing: 1px;
+    }
+
+    .container-text-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Responsividade da Programação */
+    #programacao {
+        padding: 50px 15px 70px;
+    }
+
+    #programacao-title {
+        font-size: 2rem;
+        margin-bottom: 25px;
+    }
+
+    .programacao-pill {
+        padding: 12px 18px;
+        max-width: 100%;
+        border-radius: 30px;
+    }
+
+    .pill-time {
+        font-size: 1rem;
+        min-width: 45px;
+    }
+
+    .pill-divider {
+        height: 16px;
+        margin: 0 12px;
+    }
+
+    .pill-event {
+        font-size: 0.72rem;
+        letter-spacing: 0.8px;
+    }
+
+    .wind-decor {
+        width: 90px;
+    }
+
+    .wind-left {
+        bottom: -5px;
+        left: -5px;
+    }
+
+    .wind-right {
+        bottom: -10px;
+        right: -5px;
     }
 }
