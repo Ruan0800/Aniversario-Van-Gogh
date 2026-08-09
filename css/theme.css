@@ -71,13 +71,14 @@ h3 {
     background: linear-gradient(135deg, #ffffff 0%, var(--gold) 50%, #b38628 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: var(--gold-glow);
+    /* text-shadow: var(--gold-glow); */
 }
 
-/* Cards (Mural de Mensagens e Countdown) */
 .countdown-item,
-.card-mensagem,
-#form-mensagem {
+.card-mensagem
+
+/* #form-mensagem  */
+    {
     background: radial-gradient(circle at top right, #111e3d, var(--bg-card));
     border: 1px solid rgba(223, 178, 87, 0.3);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
@@ -85,7 +86,6 @@ h3 {
     -webkit-backdrop-filter: blur(4px);
 }
 
-/* Efeito de Hover nos Botões */
 .buttons a:hover,
 .opcoes-presentes button:hover,
 #form-mensagem button:hover,

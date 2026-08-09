@@ -59,14 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const days = Math.floor(difference / msInDay);
         const hours = Math.floor((difference % msInDay) / msInHour);
-        const minutes = Math.floor((difference % msInHour) / msInMinute);
         const seconds = Math.floor((difference % msInMinute) / msInSecond);
 
         // 4. Renderiza dinamicamente os blocos com o HTML solicitado
         countdownContainer.innerHTML = 
             createCountdownHTML(days, 'Dias') +
+            '<div class="countdown-separator">:</div>' +
             createCountdownHTML(hours, 'Horas') +
-            createCountdownHTML(minutes, 'Minutos') +
+            '<div class="countdown-separator">:</div>' +
             createCountdownHTML(seconds, 'Segundos');
     };
 

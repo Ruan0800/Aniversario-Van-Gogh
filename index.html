@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>15 Anos - Maria Eduarda</title>
     <link rel="stylesheet" href="css/styles.css">
-    <!-- <link rel="stylesheet" href="css/theme.css"> -->
+    <link rel="stylesheet" href="css/theme.css">
 </head>
 
 <body>
@@ -15,7 +15,6 @@
     <header id="hero">
         <h1>Maria Eduarda</h1>
         <h2>15 anos</h2>
-        <p>Sejam Bem-vindos à minha noite estrelada!</p>
         <!-- Contador -->
         <div id="countdown">
             <!-- Injetado via JS: Dias : Horas : Segundos -->
@@ -26,19 +25,14 @@
     <section id="localizacao">
         <div class="localizacao-wrapper">
             <div class="localizacao-intro">
-                <div class="intro-content">
-                    <h2 class="welcome-title">Sejam Bem-vindos!</h2>
-                    <h3 class="welcome-subtitle">à minha noite estrelada</h3>
-                    <p class="welcome-text">
-                        Completar 15 anos é pintar uma nova tela cheia de sonhos, cores e expectativas. Preparei cada
-                        detalhe desta noite para celebrar a vida ao lado das pessoas que iluminam o meu caminho.
-                        <span class="highlight-gold">A NOITE É NOSSA!</span>
-                    </p>
-                    <!-- <div class="intro-image-container">
-                        <img src="assets/images/EstrelaELua.png" alt="Estrela e Lua" class="estrela-lua-img">
-                    </div> -->
-                </div>
-
+                <h2 class="welcome-title">Sejam Bem-vindos!</h2>
+                <h3 class="welcome-subtitle">à minha noite estrelada</h3>
+                <p class="welcome-text">
+                    Completar 15 anos é pintar uma nova tela cheia de sonhos, cores e expectativas. Preparei cada
+                    detalhe desta noite para celebrar a vida ao lado das pessoas que iluminam o meu caminho. Fiquem
+                    à vontade para explorar o site, confirmar sua presença e, claro, registrar cada momento
+                    inesquecível comigo. <span class="highlight-gold">A NOITE É NOSSA!</span>
+                </p>
             </div>
 
             <div class="localizacao-card">
@@ -89,35 +83,134 @@
     <!-- 4. SUGESTÕES DE PRESENTES -->
     <section id="presentes">
         <h2>Sugestões de Presentes</h2>
+        <p class="presentes-subtitle">Sua presença é o maior presente, mas se desejar nos presentear, deixamos algumas sugestões:</p>
         <div class="opcoes-presentes">
-            <button id="btn-lista-mimos">Lista de Mimos</button>
-            <button id="btn-pix">Presente Digital / PIX</button>
+            <button id="btn-lista-mimos" class="tab-btn active">Lista de Mimos</button>
+            <button id="btn-pix" class="tab-btn">Presente Digital / PIX</button>
         </div>
-        <!-- Modal ou transição para mostrar os itens (Creme, Vestidos, etc.) -->
+
+        <!-- Conteúdo Tab: Lista de Mimos -->
+        <div class="tab-content" id="content-lista-mimos">
+            <div class="carousel-container">
+                <button class="carousel-arrow prev-arrow">&lt;</button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track" id="gift-carousel-track">
+                        <div class="gift-card active">
+                            <div class="gift-image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400&q=80" alt="Creme de Cabelo">
+                            </div>
+                            <h4 class="gift-title">Creme de Cabelo Defranizador de Cachos</h4>
+                            <div class="gift-footer">
+                                <span class="heart-icon">♥</span>
+                            </div>
+                        </div>
+                        <div class="gift-card">
+                            <div class="gift-image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&q=80" alt="Vestido Celeste">
+                            </div>
+                            <h4 class="gift-title">Vestido Celeste Tamanho M</h4>
+                            <div class="gift-footer">
+                                <span class="heart-icon">♥</span>
+                            </div>
+                        </div>
+                        <div class="gift-card">
+                            <div class="gift-image-wrapper">
+                                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=80" alt="Sapato Celeste">
+                            </div>
+                            <h4 class="gift-title">Sapato Celeste Tamanho 37</h4>
+                            <div class="gift-footer">
+                                <span class="heart-icon">♥</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-arrow next-arrow">&gt;</button>
+            </div>
+            <div class="carousel-dots" id="gift-carousel-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+            </div>
+            <button class="btn-ver-lista">Ver Lista Completa</button>
+        </div>
+
+        <!-- Conteúdo Tab: PIX -->
+        <div class="tab-content hidden" id="content-pix">
+            <div class="pix-card">
+                <div class="qr-code-container">
+                    <svg width="150" height="150" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg" class="qr-code-svg">
+                        <path d="M0 0h7v7H0V0zm1 1v5h5V1H1zm1 1h3v3H2V2zm6-2h1v1H8V0zm2 0h1v2h-1V0zm2 0h1v1h-1V0zm3 0h7v7h-7V0zm1 1v5h5V1h-5zm1 1h3v3h-3V2zM0 8h1v1H0V8zm2 0h3v1H2V8zm4 0h1v2H6V8zm3 0h1v1H9V8zm1 0h1v1h-1V8zm2 0h1v2h-1V8zm5 0h1v1h-1V8zm2 0h1v2h-1V8zm-8 2h1v1H9v-1zm4 0h1v1h-1v-1zm4 0h2v1h-2v-1zm2 0h1v2h-1v-2zm-12 2h7v1H0v-1zm1 1h5v1H1v-1zm6 0h1v2H7v-2zm2 0h1v1H9v-1zm2 0h1v1h-1v-1zm3 0h1v1h-1v-1zm1 0h1v1h-1v-1zm2 0h1v1h-1v-1zm2 0h1v2h-1v-2zm-12 2h1v1H7v-1zm2 0h2v1H9v-1zm3 0h1v2h-1v-2zm2 0h1v1h-1v-1zm2 0h1v1h-1v-1zm1 0h1v1h-1v-1zm-15 2h1v1H0v-1zm2 0h1v1H2v-1zm2 0h1v1H4v-1zm2 0h1v2H6v-2zm4 0h1v1h-1v-1zm2 0h1v1h-1v-1zm1 0h2v1h-2v-1zm3 0h1v1h-1v-1zm2 0h2v1h-2v-1zm2 0h1v1h-1v-1zm-15 2h7v7H0v-7zm1 1v5h5V17H1zm1 1h3v3H2v-3zm6-2h1v1H8v-1zm1 1h1v1H9v-1zm2 0h1v1h-1v-1zm3 0h2v1h-2v-1zm2 0h1v1h-1v-1zm2 0h1v2h-1v-2zm-7 2h1v1h-1v-1zm2 0h1v1h-1v-1zm1 0h1v1h-1v-1zm3 0h1v1h-1v-1zm-5 2h1v1h-1v-1zm2 0h1v1h-1v-1zm1 0h2v1h-2v-1zm3 0h2v1h-2v-1zm-10 2h1v1H9v-1zm2 0h1v1h-1v-1zm1 0h1v1h-1v-1zm3 0h1v1h-1v-1zm2 0h2v1h-2v-1zm2 0h1v1h-1v-1z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <p class="pix-key-label">Chave Pix (E-mail):</p>
+                <p class="pix-key-value" id="pix-key">aniversarioduda15@gmail.com</p>
+                <button id="btn-copiar-pix">Copiar Chave Pix</button>
+            </div>
+        </div>
     </section>
 
     <!-- 5. MURAL (Deixe sua Estrela no Céu) -->
     <section id="mural">
         <h2>Deixe sua Estrela no Céu</h2>
         <form id="form-mensagem">
-            <input type="text" placeholder="Digite seu Nome" required>
-            <input type="text" placeholder="Música para o DJ">
-            <textarea placeholder="Mensagem para a Aniversariante" required></textarea>
+            <input type="text" id="mural-nome" placeholder="DIGITE SEU NOME" required>
+            <input type="text" id="mural-musica" placeholder="MÚSICA PARA O DJ">
+            <textarea id="mural-texto" placeholder="MENSAGEM PARA A ANIVERSARIANTE" required></textarea>
             <button type="submit">Enviar</button>
         </form>
 
-        <!-- Feed de Mensagens Reais -->
-        <div id="feed-mensagens">
-            <!-- Cards de mensagens injetados via JS/Backend -->
+        <!-- Céu Estrelado Interativo (Substituindo o feed-mensagens) -->
+        <div id="ceu-mural-container">
+            <img src="assets/images/ventosBaixo.png" alt="Ondas do Céu" class="ceu-decor-top">
+            <div id="ceu-mural">
+                <!-- Estrelas dinâmicas representando mensagens injetadas via JS -->
+            </div>
+            
+            <!-- Popup do Card de Mensagem -->
+            <div id="mensagem-popup" class="mensagem-popup hidden">
+                <button class="popup-close" id="btn-close-popup">&times;</button>
+                <div class="popup-content">
+                    <p class="popup-author">DE: <span id="popup-de">Nome</span></p>
+                    <p class="popup-music">MÚSICA: <span id="popup-musica">Música</span></p>
+                    <div class="popup-divider"></div>
+                    <p class="popup-text" id="popup-mensagem">Mensagem...</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- 6. GALERIA (Momentos Inesquecíveis) -->
     <section id="galeria">
         <h2>Momentos Inesquecíveis</h2>
-        <button id="btn-upload">Compartilhe suas fotos da festa!</button>
-        <div class="grid-fotos">
-            <!-- Fotos enviadas -->
+        <input type="file" id="input-foto" accept="image/*" multiple style="display:none">
+        <button id="btn-upload">
+            <span class="camera-icon">📷</span> Compartilhe suas fotos da festa!
+        </button>
+        
+        <div class="gallery-carousel-container">
+            <button class="gallery-arrow prev-photo">&lt;</button>
+            <div class="gallery-track-container">
+                <div class="gallery-track" id="gallery-track">
+                    <!-- Fotos enviadas serão renderizadas aqui -->
+                    <div class="gallery-photo-placeholder">
+                        <p>Nenhuma foto compartilhada ainda. Seja o primeiro a compartilhar!</p>
+                    </div>
+                </div>
+            </div>
+            <button class="gallery-arrow next-photo">&gt;</button>
+        </div>
+        <div class="gallery-dots" id="gallery-dots"></div>
+        <button id="btn-ver-todas">Ver Todas as Fotos</button>
+        
+        <!-- Modal Grid Completo -->
+        <div id="gallery-modal" class="gallery-modal hidden">
+            <div class="modal-content">
+                <button class="modal-close" id="btn-close-modal">&times;</button>
+                <h3>Todas as Fotos do Evento</h3>
+                <div class="modal-grid" id="modal-grid">
+                    <!-- Grid com todas as fotos -->
+                </div>
+            </div>
         </div>
     </section>
 
