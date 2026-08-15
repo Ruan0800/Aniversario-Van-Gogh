@@ -794,6 +794,7 @@ section {
 
 #mural {
     background-color: #E9ECEF;
+    height: auto;
 }
 
 #mural h2 {
@@ -880,9 +881,16 @@ section {
     pointer-events: none;
 }
 
+.fundo-estrelado {
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 0;
+}
+
 #ceu-mural {
     background: linear-gradient(180deg, #0e1e3e 0%, #030712 100%);
-    height: 380px;
+    height: 200px;
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
@@ -968,10 +976,21 @@ section {
     }
 }
 
+.background-modal {
+    width: 540px;
+    height: 200px;
+    background-color: #0B132B;
+    padding-top: 30px;
+}
+
+.background-modal:has(.mensagem-popup:not(.hidden)) {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 /* Popup de mensagem */
 .mensagem-popup {
     position: absolute;
-    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
     background: radial-gradient(circle at top right, #111e3d, var(--bg-card));
@@ -1049,7 +1068,6 @@ section {
 #galeria {
     text-align: center;
     max-width: 800px;
-    margin: 0 auto;
 }
 
 #galeria h2 {
