@@ -132,7 +132,7 @@
                 <span class="dot" data-index="1"></span>
                 <span class="dot" data-index="2"></span>
             </div>
-            <button class="btn-ver-lista">Ver Lista Completa</button>
+            <button class="btn-ver-lista" id="btn-ver-lista-mimos">Ver Lista Completa</button>
         </div>
 
         <!-- Conteúdo Tab: PIX -->
@@ -144,6 +144,17 @@
                 <p class="pix-key-label">Chave Pix (Telefone):</p>
                 <p class="pix-key-value" id="pix-key">85991200390</p>
                 <button id="btn-copiar-pix">Copiar Chave Pix</button>
+            </div>
+        </div>
+
+        <!-- Modal Lista Completa de Mimos -->
+        <div id="mimos-modal" class="gallery-modal hidden">
+            <div class="modal-content">
+                <button class="modal-close" id="btn-close-mimos-modal">&times;</button>
+                <h3 class="modal-mimos-title">Lista Completa de Sugestões</h3>
+                <div class="mimos-modal-grid" id="mimos-modal-grid">
+                    <!-- Cards de presentes clonados via JS -->
+                </div>
             </div>
         </div>
     </section>

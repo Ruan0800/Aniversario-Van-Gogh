@@ -183,7 +183,7 @@ section {
 
 .welcome-title {
     font-family: var(--font-cursive);
-    font-size: 3.8rem;
+    font-size: 4rem;
     background: none;
     -webkit-background-clip: initial;
     background-clip: initial;
@@ -195,12 +195,12 @@ section {
     letter-spacing: normal;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     font-weight: normal;
-    line-height: 1.1;
+    line-height: 1.0;
 }
 
 .welcome-subtitle {
     font-family: var(--font-cursive);
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: var(--gold);
     margin-bottom: 25px;
     text-align: center;
@@ -208,18 +208,18 @@ section {
     letter-spacing: normal;
     text-shadow: none;
     font-weight: normal;
-    margin-top: -5px;
-    line-height: 1.1;
+    margin-top: -14px;
+    line-height: 1.0;
 }
 
 .welcome-text {
     font-family: var(--font-body);
-    font-size: 0.65rem;
+    font-size: 0.95rem;
     line-height: 1.6;
-    color: var(--text-muted);
+    color: #cbd5e1;
     text-transform: uppercase;
     font-weight: 300;
-    letter-spacing: 1.2px;
+    letter-spacing: 0.8px;
     text-align: center;
 }
 
@@ -265,9 +265,9 @@ section {
 
 .card-address {
     font-family: var(--font-body);
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     color: var(--text-muted);
     margin-bottom: 35px;
     font-weight: 400;
@@ -477,19 +477,25 @@ section {
 
 #presentes h2 {
     font-family: var(--font-cursive);
-    font-size: 2.5rem;
+    font-size: 3.2rem;
+    color: var(--gold);
+    background: linear-gradient(135deg, #ffffff 0%, var(--gold) 50%, #dfb257 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-transform: none;
     letter-spacing: normal;
     font-weight: normal;
-    margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .presentes-subtitle {
     font-family: var(--font-body);
-    font-size: 0.9rem;
+    font-size: 0.98rem;
     color: var(--text-muted);
     margin-bottom: 30px;
-    max-width: 350px;
+    max-width: 450px;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.5;
@@ -810,7 +816,6 @@ section {
     position: relative;
     border-bottom: none !important;
 }
-
 #mural h2 {
     font-family: var(--font-cursive);
     font-size: 3rem;
@@ -826,7 +831,6 @@ section {
     text-align: center;
     margin-bottom: 25px;
 }
-
 #form-mensagem {
     background-color: #E9ECEF;
     border: none;
@@ -956,10 +960,22 @@ section {
     height: 100%;
     min-width: 100%;
     display: block;
-    background-image: url('../assets/images/fundo estrelado.png');
-    background-repeat: repeat-x;
-    background-size: auto 100%;
-    background-position: top left;
+    background-color: #070d21;
+    background-image: 
+        radial-gradient(1px 1px at 25px 35px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1px 1px at 85px 120px, rgba(255, 255, 255, 0.35), transparent),
+        radial-gradient(1.5px 1.5px at 150px 45px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 210px 160px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 290px 75px, rgba(255, 255, 255, 0.55), transparent),
+        radial-gradient(1px 1px at 360px 140px, rgba(255, 255, 255, 0.4), transparent),
+        radial-gradient(1.5px 1.5px at 430px 60px, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(1px 1px at 500px 180px, rgba(255, 255, 255, 0.35), transparent),
+        radial-gradient(1.5px 1.5px at 580px 90px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 660px 150px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 730px 40px, rgba(255, 255, 255, 0.45), transparent),
+        radial-gradient(1px 1px at 810px 190px, rgba(255, 255, 255, 0.4), transparent),
+        linear-gradient(180deg, #070d21 0%, #0b1530 50%, #080e24 100%);
+    background-size: 300px 200px, 300px 200px, 300px 200px, 300px 200px, 300px 200px, 300px 200px, 300px 200px, 300px 200px, 300px 200px, 300px 200px, 300px 200px, 300px 200px, 100% 100%;
 }
 
 .fundo-estrelado {
@@ -1153,20 +1169,19 @@ section {
     background: linear-gradient(180deg, rgba(6, 17, 41, 0.78) 0%, rgba(3, 7, 18, 0.9) 100%), url('../assets/images/imagemfundosectionimage.png') no-repeat center center / cover;
     position: relative;
     border-bottom: none !important;
-}
-
-#galeria h2 {
-    font-family: var(--font-title);
-    font-size: 2.5rem;
-    color: #ffffff;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 25px;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-#galeria h2 .highlight-gold {
+}#galeria h2 {
+    font-family: var(--font-cursive);
+    font-size: 3.2rem;
     color: var(--gold);
+    background: linear-gradient(135deg, #ffffff 0%, var(--gold) 50%, #dfb257 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 25px;
 }
 
 #btn-upload {
@@ -1402,6 +1417,21 @@ section {
     margin-top: 15px;
 }
 
+.mimos-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 15px 0;
+    max-height: 65vh;
+    overflow-y: auto;
+}
+
+.mimos-modal-grid .gift-card {
+    width: 100% !important;
+    margin: 0 !important;
+    flex-shrink: 0;
+}
+
 .modal-grid img {
     width: 100%;
     height: 180px;
@@ -1444,6 +1474,32 @@ footer {
         margin-bottom: 2px;
     }
 
+    section h2,
+    #presentes h2,
+    #mural h2,
+    #galeria h2,
+    .welcome-title {
+        font-size: clamp(1.6rem, 7vw, 2.4rem) !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        margin-bottom: 12px;
+        line-height: 1.15;
+    }
+
+    .welcome-title {
+        margin-bottom: 0px !important;
+    }
+
+    .welcome-subtitle {
+        font-size: clamp(1.35rem, 5.8vw, 1.9rem) !important;
+        white-space: nowrap !important;
+        text-align: center;
+        margin-top: -10px !important;
+        margin-bottom: 18px !important;
+        line-height: 1.1;
+    }
+
     #hero h2 {
         font-size: 2.2rem;
         line-height: 1.1;
@@ -1478,20 +1534,13 @@ footer {
         gap: 5px;
     }
 
-    .welcome-title {
-        font-size: 2.4rem;
-        text-align: center;
-    }
 
-    .welcome-subtitle {
-        font-size: 1.8rem;
-        text-align: center;
-        margin-bottom: 15px;
-    }
 
     .welcome-text {
         text-align: center;
-        font-size: 0.58rem;
+        font-size: 0.88rem !important;
+        line-height: 1.5 !important;
+        letter-spacing: 0.5px !important;
     }
 
     .localizacao-card {
@@ -1507,8 +1556,9 @@ footer {
     }
 
     .card-address {
-        font-size: 0.7rem;
-        letter-spacing: 1px;
+        font-size: 0.85rem !important;
+        letter-spacing: 0.8px !important;
+        line-height: 1.4 !important;
     }
 
     .container-text-image {

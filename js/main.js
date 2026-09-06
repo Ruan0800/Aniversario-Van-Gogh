@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicialização Geral
     initGiftTabs();
     initGiftCarousel();
+    initMimosModal();
     initPixCopy();
     initMuralCeu();
     initGaleriaFotos();
@@ -34,6 +35,38 @@ function initGiftTabs() {
         btnMimos.classList.remove('active');
         contentPix.classList.remove('hidden');
         contentMimos.classList.add('hidden');
+    });
+}
+
+function initMimosModal() {
+    const btnVerLista = document.getElementById('btn-ver-lista-mimos');
+    const modalMimos = document.getElementById('mimos-modal');
+    const modalClose = document.getElementById('btn-close-mimos-modal');
+    const modalGrid = document.getElementById('mimos-modal-grid');
+
+    if (!btnVerLista || !modalMimos || !modalClose || !modalGrid) return;
+
+    btnVerLista.addEventListener('click', () => {
+        modalGrid.innerHTML = '';
+        const cards = document.querySelectorAll('#gift-carousel-track .gift-card');
+        cards.forEach(card => {
+            const clone = card.cloneNode(true);
+            modalGrid.appendChild(clone);
+        });
+        modalMimos.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    });
+
+    modalClose.addEventListener('click', () => {
+        modalMimos.classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+
+    modalMimos.addEventListener('click', (e) => {
+        if (e.target === modalMimos) {
+            modalMimos.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
     });
 }
 
