@@ -173,9 +173,14 @@ function initPixCopy() {
 /* ==========================================================================
    4. MURAL: DEIXE SUA ESTRELA NO CÉU
    ========================================================================== */
+/* ==========================================================================
+   4. MURAL: DEIXE SUA ESTRELA NO CÉU
+   ========================================================================== */
 function initMuralCeu() {
     const form = document.getElementById('form-mensagem');
     const ceu = document.getElementById('ceu-mural');
+    const ceuContent = document.getElementById('ceu-mural-content');
+    const modalOverlay = document.getElementById('modal-mensagem-overlay');
     const popup = document.getElementById('mensagem-popup');
     const popupClose = document.getElementById('btn-close-popup');
     
@@ -183,7 +188,7 @@ function initMuralCeu() {
     const popupMusica = document.getElementById('popup-musica');
     const popupMsg = document.getElementById('popup-mensagem');
 
-    if (!form || !ceu || !popup) return;
+    if (!form || !ceu || !ceuContent || !modalOverlay) return;
 
     const LOCAL_STORAGE_KEY = 'convite_duda_mensagens';
 
@@ -199,21 +204,16 @@ function initMuralCeu() {
     }
 
     // Renderiza uma estrela individual no céu
-    function renderEstrela(msg, index, total) {
+    function renderEstrela(msg, index, total, ceuWidth) {
         const estrela = document.createElement('div');
         estrela.classList.add('message-star');
         
-        // Determinar coordenadas de posicionamento
-        // O céu se expande horizontalmente com o número de estrelas
-        const ceuWidth = Math.max(window.innerWidth, total * 120 + 200);
-        ceu.style.minWidth = `${ceuWidth}px`;
-
-        // Atribuir x e y salvos ou calcular novos
+        // Atribuir x e y salvos ou calcular novos de forma bem distribuída
         if (!msg.x || !msg.y) {
-            // Dividir o céu em faixas horizontais proporcionais para evitar aglomeração excessiva
-            const segmentWidth = (ceuWidth - 200) / total;
-            msg.x = Math.floor(segmentWidth * index + 100 + Math.random() * (segmentWidth * 0.4));
-            msg.y = Math.floor(60 + Math.random() * 200); // Faixa vertical segura do céu (entre 60px e 260px)
+            const safeTotal = Math.max(1, total);
+            const segmentWidth = (ceuWidth - 160) / safeTotal;
+            msg.x = Math.floor(segmentWidth * index + 60 + Math.random() * (segmentWidth * 0.5));
+            msg.y = Math.floor(40 + Math.random() * 160); // Faixa vertical segura do céu
         }
 
         estrela.style.left = `${msg.x}px`;
@@ -231,40 +231,103 @@ function initMuralCeu() {
         tooltip.textContent = msg.nome;
         estrela.appendChild(tooltip);
 
-        // Evento de clique para exibir os detalhes no popup
+        // Evento de clique para exibir os detalhes no popup modal
         estrela.addEventListener('click', (e) => {
+            if (isDragging) return; // Evitar abrir se estiver apenas arrastando o céu
             e.stopPropagation();
             popupDe.textContent = msg.nome;
             popupMusica.textContent = msg.musica ? msg.musica : 'Nenhuma selecionada';
             popupMsg.textContent = msg.mensagem;
             
-            popup.classList.remove('hidden');
-            
-            // Centralizar visualmente o popup em relação à estrela clicada (opcional)
-            // Para simplicidade, o popup fica fixado no centro/baixo do contêiner como no design
+            modalOverlay.classList.remove('hidden');
         });
 
-        ceu.appendChild(estrela);
+        ceuContent.appendChild(estrela);
     }
 
     // Renderizar todo o céu
     function atualizarCeu() {
         // Limpar estrelas existentes
-        const estrelasExistentes = ceu.querySelectorAll('.message-star');
+        const estrelasExistentes = ceuContent.querySelectorAll('.message-star');
         estrelasExistentes.forEach(star => star.remove());
 
         const mensagens = getMensagens();
-        
+        const minWidth = Math.max(window.innerWidth, mensagens.length * 150 + 300);
+        ceuContent.style.width = `${minWidth}px`;
+
         if (mensagens.length === 0) {
-            ceu.style.minWidth = '100%';
-            // Céu fica sem nenhuma estrela
             return;
         }
 
+        let atualizado = false;
         mensagens.forEach((msg, idx) => {
-            renderEstrela(msg, idx, mensagens.length);
+            if (!msg.x || !msg.y) {
+                atualizado = true;
+            }
+            renderEstrela(msg, idx, mensagens.length, minWidth);
         });
+
+        if (atualizado) {
+            salvarMensagens(mensagens);
+        }
     }
+
+    // Funcionalidade Drag-to-Scroll (Arrastar para navegar pelo céu)
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let isDragging = false;
+
+    ceu.addEventListener('mousedown', (e) => {
+        isDown = true;
+        isDragging = false;
+        ceu.classList.add('active');
+        startX = e.pageX - ceu.offsetLeft;
+        scrollLeft = ceu.scrollLeft;
+    });
+
+    ceu.addEventListener('mouseleave', () => {
+        isDown = false;
+        ceu.classList.remove('active');
+    });
+
+    ceu.addEventListener('mouseup', () => {
+        isDown = false;
+        ceu.classList.remove('active');
+    });
+
+    ceu.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - ceu.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        if (Math.abs(walk) > 5) {
+            isDragging = true;
+        }
+        ceu.scrollLeft = scrollLeft - walk;
+    });
+
+    // Suporte a Touch em dispositivos móveis
+    ceu.addEventListener('touchstart', (e) => {
+        isDown = true;
+        isDragging = false;
+        startX = e.touches[0].pageX - ceu.offsetLeft;
+        scrollLeft = ceu.scrollLeft;
+    }, { passive: true });
+
+    ceu.addEventListener('touchend', () => {
+        isDown = false;
+    });
+
+    ceu.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        const x = e.touches[0].pageX - ceu.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        if (Math.abs(walk) > 5) {
+            isDragging = true;
+        }
+        ceu.scrollLeft = scrollLeft - walk;
+    }, { passive: true });
 
     // Formulário de Envio
     form.addEventListener('submit', (e) => {
@@ -296,9 +359,9 @@ function initMuralCeu() {
         // Re-renderizar o céu
         atualizarCeu();
 
-        // Rolar o céu até a última estrela adicionada
+        // Rolar o céu até a última estrela adicionada e exibir o card
         setTimeout(() => {
-            const estrelas = ceu.querySelectorAll('.message-star');
+            const estrelas = ceuContent.querySelectorAll('.message-star');
             if (estrelas.length > 0) {
                 const ultimaEstrela = estrelas[estrelas.length - 1];
                 ceu.scrollTo({
@@ -306,21 +369,25 @@ function initMuralCeu() {
                     behavior: 'smooth'
                 });
                 
-                // Simular clique na última estrela para abrir a mensagem recém-enviada
-                ultimaEstrela.click();
+                // Exibir popup da última estrela recém enviada
+                popupDe.textContent = novaMsg.nome;
+                popupMusica.textContent = novaMsg.musica ? novaMsg.musica : 'Nenhuma selecionada';
+                popupMsg.textContent = novaMsg.mensagem;
+                modalOverlay.classList.remove('hidden');
             }
         }, 300);
     });
 
-    // Fechar popup
-    popupClose.addEventListener('click', () => {
-        popup.classList.add('hidden');
-    });
+    // Fechar popup modal
+    if (popupClose) {
+        popupClose.addEventListener('click', () => {
+            modalOverlay.classList.add('hidden');
+        });
+    }
 
-    // Fechar popup se clicar fora dele no céu
-    document.addEventListener('click', (e) => {
-        if (!popup.contains(e.target) && !e.target.closest('.message-star')) {
-            popup.classList.add('hidden');
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            modalOverlay.classList.add('hidden');
         }
     });
 
