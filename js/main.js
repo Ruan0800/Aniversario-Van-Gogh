@@ -191,15 +191,16 @@ function initMuralCeu() {
     if (!form || !ceu || !ceuContent || !modalOverlay) return;
 
     const LOCAL_STORAGE_KEY = 'convite_duda_mensagens';
+    let mensagensCache = [];
 
     // Obter mensagens salvas no localStorage
-    function getMensagens() {
+    function getMensagensLocal() {
         const data = localStorage.getItem(LOCAL_STORAGE_KEY);
         return data ? JSON.parse(data) : [];
     }
 
     // Salvar mensagens no localStorage
-    function salvarMensagens(mensagens) {
+    function salvarMensagensLocal(mensagens) {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(mensagens));
     }
 
@@ -208,32 +209,28 @@ function initMuralCeu() {
         const estrela = document.createElement('div');
         estrela.classList.add('message-star');
         
-        // Atribuir x e y salvos ou calcular novos de forma bem distribuída
         if (!msg.x || !msg.y) {
             const safeTotal = Math.max(1, total);
             const segmentWidth = (ceuWidth - 160) / safeTotal;
             msg.x = Math.floor(segmentWidth * index + 60 + Math.random() * (segmentWidth * 0.5));
-            msg.y = Math.floor(40 + Math.random() * 160); // Faixa vertical segura do céu
+            msg.y = Math.floor(40 + Math.random() * 160);
         }
 
         estrela.style.left = `${msg.x}px`;
         estrela.style.top = `${msg.y}px`;
 
-        // Renderizar a imagem da estrela de Van Gogh
         const img = document.createElement('img');
         img.src = 'assets/images/estrelaVanGogh.png';
         img.alt = 'Estrela';
         estrela.appendChild(img);
 
-        // Tooltip com o nome da pessoa
         const tooltip = document.createElement('span');
         tooltip.classList.add('tooltip-name');
         tooltip.textContent = msg.nome;
         estrela.appendChild(tooltip);
 
-        // Evento de clique para exibir os detalhes no popup modal
         estrela.addEventListener('click', (e) => {
-            if (isDragging) return; // Evitar abrir se estiver apenas arrastando o céu
+            if (isDragging) return;
             e.stopPropagation();
             popupDe.textContent = msg.nome;
             popupMusica.textContent = msg.musica ? msg.musica : 'Nenhuma selecionada';
@@ -247,32 +244,42 @@ function initMuralCeu() {
 
     // Renderizar todo o céu
     function atualizarCeu() {
-        // Limpar estrelas existentes
         const estrelasExistentes = ceuContent.querySelectorAll('.message-star');
         estrelasExistentes.forEach(star => star.remove());
 
-        const mensagens = getMensagens();
-        const minWidth = Math.max(window.innerWidth, mensagens.length * 150 + 300);
+        const minWidth = Math.max(window.innerWidth, mensagensCache.length * 150 + 300);
         ceuContent.style.width = `${minWidth}px`;
 
-        if (mensagens.length === 0) {
-            return;
-        }
+        if (mensagensCache.length === 0) return;
 
         let atualizado = false;
-        mensagens.forEach((msg, idx) => {
+        mensagensCache.forEach((msg, idx) => {
             if (!msg.x || !msg.y) {
                 atualizado = true;
             }
-            renderEstrela(msg, idx, mensagens.length, minWidth);
+            renderEstrela(msg, idx, mensagensCache.length, minWidth);
         });
 
         if (atualizado) {
-            salvarMensagens(mensagens);
+            salvarMensagensLocal(mensagensCache);
         }
     }
 
-    // Funcionalidade Drag-to-Scroll (Arrastar para navegar pelo céu)
+    async function carregarMensagens() {
+        if (typeof apiBuscarMensagens === 'function') {
+            const remoteData = await apiBuscarMensagens();
+            if (remoteData && Array.isArray(remoteData)) {
+                mensagensCache = remoteData;
+                salvarMensagensLocal(mensagensCache);
+                atualizarCeu();
+                return;
+            }
+        }
+        mensagensCache = getMensagensLocal();
+        atualizarCeu();
+    }
+
+    // Funcionalidade Drag-to-Scroll
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -307,7 +314,6 @@ function initMuralCeu() {
         ceu.scrollLeft = scrollLeft - walk;
     });
 
-    // Suporte a Touch em dispositivos móveis
     ceu.addEventListener('touchstart', (e) => {
         isDown = true;
         isDragging = false;
@@ -330,36 +336,46 @@ function initMuralCeu() {
     }, { passive: true });
 
     // Formulário de Envio
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const inputNome = document.getElementById('mural-nome');
         const inputMusica = document.getElementById('mural-musica');
         const inputTexto = document.getElementById('mural-texto');
+        const submitBtn = form.querySelector('button[type="submit"]');
 
         if (!inputNome || !inputTexto) return;
 
-        const mensagens = getMensagens();
+        const nome = inputNome.value.trim();
+        const musica = inputMusica.value.trim();
+        const mensagem = inputTexto.value.trim();
 
-        // Criar objeto da mensagem
-        const novaMsg = {
-            nome: inputNome.value.trim(),
-            musica: inputMusica.value.trim(),
-            mensagem: inputTexto.value.trim(),
-            x: null, // Será gerado aleatoriamente no render
-            y: null
-        };
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = '✈ Enviando...';
+        }
 
-        mensagens.push(novaMsg);
-        salvarMensagens(mensagens);
+        const novaMsg = { nome, musica, mensagem, x: null, y: null };
 
-        // Limpar formulário
+        try {
+            if (typeof apiEnviarMensagem === 'function') {
+                await apiEnviarMensagem(nome, musica, mensagem);
+            }
+        } catch (err) {
+            console.warn('Erro ao salvar no Supabase, salvando localmente:', err);
+        }
+
+        mensagensCache.push(novaMsg);
+        salvarMensagensLocal(mensagensCache);
+
         form.reset();
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = '✈ Enviar';
+        }
 
-        // Re-renderizar o céu
         atualizarCeu();
 
-        // Rolar o céu até a última estrela adicionada e exibir o card
         setTimeout(() => {
             const estrelas = ceuContent.querySelectorAll('.message-star');
             if (estrelas.length > 0) {
@@ -369,7 +385,6 @@ function initMuralCeu() {
                     behavior: 'smooth'
                 });
                 
-                // Exibir popup da última estrela recém enviada
                 popupDe.textContent = novaMsg.nome;
                 popupMusica.textContent = novaMsg.musica ? novaMsg.musica : 'Nenhuma selecionada';
                 popupMsg.textContent = novaMsg.mensagem;
@@ -378,7 +393,6 @@ function initMuralCeu() {
         }, 300);
     });
 
-    // Fechar popup modal
     if (popupClose) {
         popupClose.addEventListener('click', () => {
             modalOverlay.classList.add('hidden');
@@ -391,8 +405,7 @@ function initMuralCeu() {
         }
     });
 
-    // Iniciar céu
-    atualizarCeu();
+    carregarMensagens();
 }
 
 /* ==========================================================================
@@ -557,35 +570,30 @@ function initGaleriaFotos() {
         const files = Array.from(e.target.files);
         if (files.length === 0) return;
 
-        btnUpload.textContent = 'Carregando fotos...';
+        btnUpload.textContent = 'Enviando fotos...';
         btnUpload.style.pointerEvents = 'none';
 
         for (const file of files) {
             try {
-                const base64 = await convertFileToBase64(file);
-                await salvarFotoDB(base64);
-                galleryPhotos.push(base64);
+                if (typeof apiEnviarFoto === 'function') {
+                    const photoUrl = await apiEnviarFoto(file);
+                    if (photoUrl) {
+                        galleryPhotos.push(photoUrl);
+                    }
+                }
             } catch (err) {
-                console.error('Erro ao ler ou salvar arquivo: ', err);
+                console.error('Erro ao enviar foto para o Supabase: ', err);
+                alert('Erro ao enviar a foto. Verifique se o bucket e as permissões estão ativos no Supabase.');
             }
         }
 
         btnUpload.innerHTML = '<span class="camera-icon">📷</span> Compartilhe suas fotos da festa!';
         btnUpload.style.pointerEvents = 'auto';
-        fileInput.value = ''; // Reset
+        fileInput.value = '';
 
-        currentPhotoIndex = galleryPhotos.length - 1;
+        currentPhotoIndex = Math.max(0, galleryPhotos.length - 1);
         updateGallery();
     });
-
-    function convertFileToBase64(file) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-        });
-    }
 
     btnVerTodas.addEventListener('click', () => {
         modalGrid.innerHTML = '';
@@ -613,13 +621,19 @@ function initGaleriaFotos() {
         }
     });
 
-    carregarFotosDB()
-        .then(fotos => {
-            galleryPhotos = fotos;
-            updateGallery();
-        })
-        .catch(err => {
-            console.error('Erro ao carregar fotos do IndexedDB: ', err);
-            updateGallery();
-        });
+    async function inicializarFotos() {
+        if (typeof apiBuscarFotos === 'function') {
+            const remoteFotos = await apiBuscarFotos();
+            if (remoteFotos && Array.isArray(remoteFotos)) {
+                // Usar estritamente as fotos do Supabase (mesmo se o array estiver vazio [])
+                galleryPhotos = remoteFotos;
+                updateGallery();
+                return;
+            }
+        }
+        galleryPhotos = [];
+        updateGallery();
+    }
+
+    inicializarFotos();
 }
