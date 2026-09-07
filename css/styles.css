@@ -491,34 +491,44 @@ section {
 }
 
 .opcoes-presentes {
-    display: inline-flex;
-    background-color: #1a2a3a;
-    border-radius: 50px;
-    overflow: hidden;
-    padding: 0;
-    border: none;
-    margin-bottom: 20px;
+    display: flex !important;
+    /* Mude para flex */
+    max-width: 100% !important;
+    /* Não deixa passar da largura da tela/seção */
+    width: fit-content;
+    margin: 0 auto 20px auto !important;
+    /* Centraliza na página */
+    background-color: #1a2a3a !important;
+    border-radius: 50px !important;
+    overflow: hidden !important;
+    /* Esse overflow é fundamental */
+    padding: 0 !important;
+    border: none !important;
 }
 
 .tab-btn {
-    background: #1D3557;
+    background: transparent !important;
     color: #c5d3e0;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
-    padding: 14px 28px;
+    padding: 12px 18px !important;
+    /* Reduzido de 28px para 18px para não estourar em telas menores */
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 0.85rem !important;
+    /* Reduzido levemente o texto para caber o botão com folga */
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
+    border-radius: 0 !important;
+    /* Mantém canto reto para o pai cortar */
 }
 
 .tab-btn.active {
-    background-color: #254091;
-    color: #ffffff;
-    border-radius: 50px;
+    background: linear-gradient(135deg, #dfb257 0%, #b38628 100%) !important;
+    color: #2b2b2b;
+    border-radius: 50px !important;
     border: none !important;
     outline: none !important;
 }
