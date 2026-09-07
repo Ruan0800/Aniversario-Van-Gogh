@@ -1498,17 +1498,31 @@ section {
 
 .mimos-modal-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-    padding: 15px 0;
-    max-height: 65vh;
-    overflow-y: auto;
+    grid-template-columns: 1fr !important;
+    /* Força 1 card por linha no mobile */
+    gap: 16px;
+    align-items: stretch;
+    padding: 0;
+    max-height: none;
+    /* A rolagem fica por conta do .modal-body */
+    overflow-y: visible;
 }
 
+.mimos-modal-grid>div,
+.mimos-modal-grid .mimo-card,
 .mimos-modal-grid .gift-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    box-sizing: border-box;
     width: 100% !important;
     margin: 0 !important;
-    flex-shrink: 0;
 }
 
 .modal-grid img {
@@ -1545,16 +1559,15 @@ section {
     background: radial-gradient(circle at top right, #111e3d, var(--bg-card, #0a1128));
     border: 1.5px solid var(--gold, #d4af37);
     border-radius: 20px;
-    width: 92%;
-    max-width: 800px;
+    width: 85%;
+    /* Reduzido de 92% para dar margem nas laterais da tela */
+    max-width: 420px;
+    /* Reduzido de 800px para travar numa largura mais elegante no mobile */
     max-height: 85vh;
     display: flex;
     flex-direction: column;
-    /* Faz o header ficar no topo e o body rolar */
     padding: 0 !important;
-    /* Reseta paddings antigos que empurravam o conteúdo */
     overflow: hidden !important;
-    /* Desativa o scroll no container pai */
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
 }
 
@@ -1634,7 +1647,8 @@ section {
 /* Imagens dentro do card */
 .mimos-modal-grid img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    max-height: 220px;
+    /* Limita a altura para o card não ficar gigante */
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 12px;
@@ -1669,7 +1683,8 @@ section {
     }
 
     .mimos-modal-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+        /* Multi-colunas em telas maiores */
         gap: 20px;
     }
 
