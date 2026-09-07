@@ -1355,6 +1355,57 @@ section {
     transform: translateY(-2px);
 }
 
+.gallery-modal-container {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden !important;
+}
+
+/* --- CABEÇALHO DA GALERIA --- */
+.gallery-header {
+    display: flex;
+    justify-content: space-between;
+    /* Distribui o título na esquerda e o 'X' na direita */
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    background: rgba(10, 17, 40, 0.4);
+}
+
+/* Garante a centralização real do título */
+#gallery-modal .gallery-header h3 {
+    font-size: 1.25rem !important;
+    /* Ajuste aqui o tamanho desejado (ex: 0.9rem, 1rem) */
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    text-align: left !important;
+}
+
+/* Botão Fechar perfeitamente alinhado na direita */
+.gallery-header .modal-close {
+    position: static !important;
+    background: none;
+    border: none;
+    color: var(--text-muted, #a0aec0);
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 0 0 12px;
+    transition: color 0.2s ease;
+}
+
+.gallery-header .modal-close:hover {
+    color: var(--gold-light, #f3e5ab);
+}
+
+/* Ajuste do tamanho da fonte em telas maiores */
+@media (min-width: 600px) {
+    #gallery-modal .gallery-header h3 {
+        font-size: 1.2rem !important;
+    }
+}
+
 /* Modal de Galeria */
 .gallery-modal {
     position: fixed;
@@ -1362,7 +1413,8 @@ section {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(3, 7, 18, 0.95);
+    background-color: rgba(3, 7, 18, 0.92);
+    backdrop-filter: blur(8px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1378,17 +1430,34 @@ section {
 }
 
 .modal-content {
-    background: radial-gradient(circle at top right, #111e3d, var(--bg-card));
-    border: 2px solid var(--gold);
-    border-radius: 20px;
-    width: 90%;
+    background: radial-gradient(circle at top right, #111e3d, var(--bg-card, #0a1128));
+    border: 1.5px solid var(--gold, #d4af37);
+    border-radius: 16px;
+    width: 92%;
     max-width: 900px;
     max-height: 85vh;
-    padding: 35px;
-    position: relative;
-    overflow-y: auto;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* Divide entre topo fixo e corpo rolável */
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.modal-header h3 {
+    font-family: var(--font-title);
+    color: var(--gold, #d4af37);
+    font-size: 1.2rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .modal-content h3 {
@@ -1402,27 +1471,29 @@ section {
 }
 
 .modal-close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
     background: none;
     border: none;
-    color: var(--text-muted);
-    font-size: 2.2rem;
+    color: var(--text-muted, #aaa);
+    font-size: 2rem;
     cursor: pointer;
-    transition: color 0.3s ease;
     line-height: 1;
+    padding: 0 4px;
+    transition: color 0.2s ease;
 }
 
 .modal-close:hover {
-    color: var(--gold-light);
+    color: var(--gold-light, #fff);
+}
+
+.modal-body {
+    padding: 16px;
+    overflow-y: auto;
 }
 
 .modal-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
 }
 
 .mimos-modal-grid {
@@ -1453,6 +1524,160 @@ section {
     transform: scale(1.04);
     border-color: var(--gold-light);
 }
+
+@media (min-width: 600px) {
+    .modal-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .modal-body {
+        padding: 24px;
+    }
+
+    .modal-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+    }
+}
+
+/* Container principal flexível para travar o topo */
+.mimos-modal-container {
+    background: radial-gradient(circle at top right, #111e3d, var(--bg-card, #0a1128));
+    border: 1.5px solid var(--gold, #d4af37);
+    border-radius: 20px;
+    width: 92%;
+    max-width: 800px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    /* Faz o header ficar no topo e o body rolar */
+    padding: 0 !important;
+    /* Reseta paddings antigos que empurravam o conteúdo */
+    overflow: hidden !important;
+    /* Desativa o scroll no container pai */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+}
+
+/* --- Cabeçalho Fixo --- */
+.mimos-modal-container .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    background: rgba(10, 17, 40, 0.6);
+    shrink: 0;
+}
+
+.mimos-modal-container .modal-mimos-title {
+    font-family: var(--font-title);
+    color: var(--gold, #d4af37);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: left;
+}
+
+.mimos-modal-container .modal-close {
+    position: static;
+    /* Remove o position absolute antigo */
+    background: none;
+    border: none;
+    color: var(--text-muted, #a0aec0);
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+    transition: color 0.2s ease;
+}
+
+.mimos-modal-container .modal-close:hover {
+    color: var(--gold-light, #f3e5ab);
+}
+
+/* --- Área de Conteúdo Rolável --- */
+.mimos-modal-container .modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    /* O scroll acontece APENAS aqui dentro */
+    flex: 1;
+}
+
+/* --- Grid dos Cards --- */
+.mimos-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 colunas perfeitamente divididas */
+    gap: 16px;
+    align-items: stretch;
+}
+
+/* Estilização interna dos Cards clonados */
+.mimos-modal-grid>div,
+.mimos-modal-grid .mimo-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    box-sizing: border-box;
+    min-height: 280px;
+    /* Garante altura mínima uniforme */
+}
+
+/* Imagens dentro do card */
+.mimos-modal-grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+/* Títulos / Textos do card */
+.mimos-modal-grid h4,
+.mimos-modal-grid p,
+.mimos-modal-grid span {
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 6px 0;
+    line-height: 1.3;
+}
+
+/* Coração / Ícone inferior */
+.mimos-modal-grid .heart-icon,
+.mimos-modal-grid svg,
+.mimos-modal-grid i {
+    color: var(--gold, #d4af37);
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+/* --- Ajuste Responsivo para Desktop --- */
+@media (min-width: 640px) {
+    .mimos-modal-container .modal-mimos-title {
+        font-size: 1.5rem;
+    }
+
+    .mimos-modal-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .mimos-modal-container .modal-body {
+        padding: 28px;
+    }
+}
+
 
 /* ==========================================
    8. FOOTER

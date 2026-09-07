@@ -150,12 +150,21 @@
 
         <!-- Modal Lista Completa de Mimos -->
         <div id="mimos-modal" class="gallery-modal hidden">
-            <div class="modal-content">
-                <button class="modal-close" id="btn-close-mimos-modal">&times;</button>
-                <h3 class="modal-mimos-title">Lista Completa de Sugestões</h3>
-                <div class="mimos-modal-grid" id="mimos-modal-grid">
-                    <!-- Cards de presentes clonados via JS -->
+            <div class="modal-content mimos-modal-container">
+
+                <!-- Cabeçalho Fixo -->
+                <div class="modal-header">
+                    <h3 class="modal-mimos-title">Lista Completa de Sugestões</h3>
+                    <button class="modal-close" id="btn-close-mimos-modal" aria-label="Fechar">&times;</button>
                 </div>
+
+                <!-- Área Rolável (Body) -->
+                <div class="modal-body">
+                    <div class="mimos-modal-grid" id="mimos-modal-grid">
+                        <!-- Cards clonados via JS -->
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -219,12 +228,20 @@
 
         <!-- Modal Grid Completo -->
         <div id="gallery-modal" class="gallery-modal hidden">
-            <div class="modal-content">
-                <button class="modal-close" id="btn-close-modal">&times;</button>
-                <h3>Todas as Fotos do Evento</h3>
-                <div class="modal-grid" id="modal-grid">
-                    <!-- Grid com todas as fotos -->
+            <div class="modal-content gallery-modal-container">
+
+                <!-- Cabeçalho Alinhado -->
+                <div class="gallery-header">
+                    <h3>Todas as Fotos do Evento</h3>
+                    <button class="modal-close" id="btn-close-modal" aria-label="Fechar">&times;</button>
                 </div>
+
+                <!-- Conteúdo com as fotos -->
+                <div class="modal-body">
+                    <div class="modal-grid" id="modal-grid">
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
