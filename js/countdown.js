@@ -10,11 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Nota: O mês no construtor Date() do JavaScript é indexado em zero (0 = Janeiro, 8 = Setembro).
     const targetDate = new Date(2026, 8, 17, 19, 0, 0);
 
-    // ==========================================
-    // DATA PARA TESTES (Descomente a linha abaixo para testar o funcionamento com uma data no futuro)
-    // const targetDate = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000 + 10000); // 5 dias e 10 segundos a partir de agora
-    // ==========================================
-
     /**
      * Garante que números menores que 10 tenham um "0" à esquerda
      * @param {number} num 
@@ -44,35 +39,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = new Date();
         const difference = targetDate - now;
 
-        // 3. Se a data do evento já tiver passado, exibe mensagem amigável e limpa o intervalo
+        // Se a data do evento já tiver passado, exibe mensagem amigável e limpa o intervalo
         if (difference <= 0) {
             countdownContainer.innerHTML = '<span class="countdown-message" style="font-family: var(--font-title); color: var(--gold-light); font-size: 1.5rem; text-shadow: 0 0 8px var(--gold); letter-spacing: 1px;">O grande dia chegou!</span>';
             clearInterval(countdownInterval);
             return;
         }
 
-        // 2. Calcula a diferença em Dias, Horas, Minutos e Segundos
+        // 2. Converte a diferença em milissegundos
         const msInSecond = 1000;
         const msInMinute = msInSecond * 60;
         const msInHour = msInMinute * 60;
         const msInDay = msInHour * 24;
 
+        // 3. Calcula Dias, Horas, Minutos e Segundos
         const days = Math.floor(difference / msInDay);
         const hours = Math.floor((difference % msInDay) / msInHour);
+        const minutes = Math.floor((difference % msInHour) / msInMinute);
         const seconds = Math.floor((difference % msInMinute) / msInSecond);
 
-        // 4. Renderiza dinamicamente os blocos com o HTML solicitado
-        countdownContainer.innerHTML = 
+        // 4. Renderiza dinamicamente os blocos na tela
+        countdownContainer.innerHTML =
             createCountdownHTML(days, 'Dias') +
             '<div class="countdown-separator">:</div>' +
             createCountdownHTML(hours, 'Horas') +
             '<div class="countdown-separator">:</div>' +
+            createCountdownHTML(minutes, 'Minutos') +
+            '<div class="countdown-separator">:</div>' +
             createCountdownHTML(seconds, 'Segundos');
     };
 
-    // Executa imediatamente para evitar o delay de 1 segundo do setInterval inicial
+    // Executa imediatamente para evitar o delay inicial
     updateCountdown();
 
-    // 5. Atualiza o contador a cada 1 segundo
+    // Atualiza o contador a cada 1 segundo
     const countdownInterval = setInterval(updateCountdown, 1000);
 });

@@ -7,17 +7,16 @@
     <title>15 Anos - Maria Eduarda</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
     <!-- 1. HERO / BOAS-VINDAS -->
     <header id="hero">
-        <h1>Maria Eduarda</h1>
-        <h2>15 anos</h2>
-        <!-- Contador -->
+        <h1 class="title_hero">Maria Eduarda</h1>
+        <h2 class="subtitle_hero">15 anos</h2>
         <div id="countdown">
-            <!-- Injetado via JS: Dias : Horas : Segundos -->
         </div>
     </header>
 
@@ -31,17 +30,19 @@
                     Completar 15 anos é pintar uma nova tela cheia de sonhos, cores e expectativas. Preparei cada
                     detalhe desta noite para celebrar a vida ao lado das pessoas que iluminam o meu caminho. Fiquem
                     à vontade para explorar o site, confirmar sua presença e, claro, registrar cada momento
-                    inesquecível comigo. <span class="highlight-gold">A NOITE É NOSSA!</span>
+                    inesquecível comigo.<br><span class="highlight-gold">A NOITE É NOSSA!</span>
                 </p>
             </div>
 
             <div class="localizacao-card">
                 <h4 class="card-title">Localização</h4>
                 <div class="card-time">19 horas</div>
-                <div class="card-address">Avenida 20 de Janeiro 1844 - Salão de Festa</div>
+                <div class="card-address">Tv. Antônio Joaquim, 55 - Antônio Bezerra<br>Fortaleza - CE, 60350-410</div>
                 <div class="card-buttons">
-                    <a href="#" class="btn-maps">Abrir no Google Maps</a>
-                    <a href="#" class="btn-waze">Abrir no Waze</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Tv.+Ant%C3%B4nio+Joaquim%2C+55+-+Ant%C3%B4nio+Bezerra%2C+Fortaleza+-+CE%2C+60350-410"
+                        class="btn-maps">Abrir no Google Maps</a>
+                    <a href="https://waze.com/ul?q=Tv.%20Ant%C3%B4nio%20Joaquim%2C%2055%20-%20Ant%C3%B4nio%20Bezerra%2C%20Fortaleza%20-%20CE%2C%2060350-410&navigate=yes"
+                        class="btn-waze">Abrir no Waze</a>
                 </div>
             </div>
         </div>
@@ -198,7 +199,7 @@
         <h2>Momentos <span class="highlight-gold">Inesquecíveis</span></h2>
         <input type="file" id="input-foto" accept="image/*" multiple style="display:none">
         <button id="btn-upload">
-            <span class="camera-icon">📷</span> Compartilhe suas fotos da festa!
+            <i class="fa-solid fa-camera"></i> Compartilhe suas fotos da festa!
         </button>
 
         <div class="gallery-carousel-container">

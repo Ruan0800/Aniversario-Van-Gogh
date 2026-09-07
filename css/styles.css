@@ -71,42 +71,36 @@ section {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 120px 20px 100px;
     background: linear-gradient(180deg, rgba(10, 17, 40, 0.382) 0%, rgba(10, 17, 40, 0.9) 100%), url('../assets/images/fundoSectionHero.png') no-repeat center center;
     background-size: cover;
 }
 
-#hero h1 {
+#hero .title_hero {
     font-family: var(--font-cursive);
-    font-size: 4rem;
-    line-height: 1.2;
+    font-size: 3.2rem;
+    line-height: 1.3;
     color: var(--gold);
     text-transform: none;
     letter-spacing: normal;
     font-weight: normal;
-    margin-bottom: 5px;
     text-shadow: 0 0 15px rgba(243, 156, 18, 0.4);
+    margin: 0;
+    margin-bottom: -10px;
 }
 
-#hero h2 {
+#hero .subtitle_hero {
     font-family: var(--font-cursive);
-    font-size: 3.2rem;
+    font-size: 2.9rem;
     line-height: 1.2;
     color: var(--text-white);
     text-transform: none;
     letter-spacing: normal;
     font-weight: normal;
-    margin-bottom: 20px;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     background: none;
     -webkit-text-fill-color: var(--text-white);
-}
-
-#hero p {
-    font-size: 1.2rem;
-    color: var(--text-white);
-    max-width: 600px;
-    font-style: italic;
+    margin: 0;
+    margin-bottom: -5px;
 }
 
 /* Contador */
@@ -183,7 +177,7 @@ section {
 
 .welcome-title {
     font-family: var(--font-cursive);
-    font-size: 4rem;
+    font-size: 4.8rem;
     background: none;
     -webkit-background-clip: initial;
     background-clip: initial;
@@ -200,7 +194,7 @@ section {
 
 .welcome-subtitle {
     font-family: var(--font-cursive);
-    font-size: 2.8rem;
+    font-size: 3.4rem;
     color: var(--gold);
     margin-bottom: 25px;
     text-align: center;
@@ -214,19 +208,19 @@ section {
 
 .welcome-text {
     font-family: var(--font-body);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.60rem;
+    line-height: 1;
     color: #cbd5e1;
-    text-transform: uppercase;
+    text-transform: none;
     font-weight: 300;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.4px;
     text-align: center;
 }
 
-/* .welcome-text .highlight-gold {
+.welcome-text .highlight-gold {
     color: var(--gold);
     font-weight: 600;
-} */
+}
 
 /* Card de Localização */
 .localizacao-card {
@@ -250,7 +244,7 @@ section {
     text-transform: none;
     font-weight: normal;
     letter-spacing: normal;
-    font-size: 2.6rem;
+    font-size: 3rem;
 }
 
 .card-time {
@@ -269,7 +263,7 @@ section {
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-muted);
-    margin-bottom: 35px;
+    margin-bottom: 30px;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -342,7 +336,6 @@ section {
     border-radius: 25px;
     text-decoration: none;
     font-family: var(--font-body);
-    font-weight: 600;
     text-transform: uppercase;
     font-size: 0.85rem;
     cursor: pointer;
@@ -351,12 +344,7 @@ section {
 
 .buttons a:hover,
 .opcoes-presentes button:hover,
-#form-mensagem button:hover,
-#btn-upload:hover {
-    background-color: var(--gold);
-    color: var(--bg-sky);
-    box-shadow: 0 0 15px var(--gold);
-}
+#form-mensagem button:hover
 
 /* ==========================================
    4. PROGRAMAÇÃO DA NOITE
@@ -373,7 +361,7 @@ section {
 
 #programacao-title {
     font-family: var(--font-cursive);
-    font-size: 2.5rem;
+    font-size: 3.4rem;
     background: none;
     -webkit-background-clip: initial;
     background-clip: initial;
@@ -477,7 +465,7 @@ section {
 
 #presentes h2 {
     font-family: var(--font-cursive);
-    font-size: 3.2rem;
+    font-size: 3.8rem;
     color: var(--gold);
     background: linear-gradient(135deg, #ffffff 0%, var(--gold) 50%, #dfb257 100%);
     -webkit-background-clip: text;
@@ -492,13 +480,14 @@ section {
 
 .presentes-subtitle {
     font-family: var(--font-body);
-    font-size: 0.98rem;
+    font-size: 0.9rem;
     color: var(--text-muted);
     margin-bottom: 30px;
     max-width: 450px;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.5;
+    max-width: 350px;
 }
 
 .opcoes-presentes {
@@ -816,6 +805,7 @@ section {
     position: relative;
     border-bottom: none !important;
 }
+
 #mural h2 {
     font-family: var(--font-cursive);
     font-size: 3rem;
@@ -831,6 +821,7 @@ section {
     text-align: center;
     margin-bottom: 25px;
 }
+
 #form-mensagem {
     background-color: #E9ECEF;
     border: none;
@@ -961,7 +952,7 @@ section {
     min-width: 100%;
     display: block;
     background-color: #070d21;
-    background-image: 
+    background-image:
         radial-gradient(1px 1px at 25px 35px, rgba(255, 255, 255, 0.5), transparent),
         radial-gradient(1px 1px at 85px 120px, rgba(255, 255, 255, 0.35), transparent),
         radial-gradient(1.5px 1.5px at 150px 45px, rgba(255, 255, 255, 0.6), transparent),
@@ -1169,7 +1160,9 @@ section {
     background: linear-gradient(180deg, rgba(6, 17, 41, 0.78) 0%, rgba(3, 7, 18, 0.9) 100%), url('../assets/images/imagemfundosectionimage.png') no-repeat center center / cover;
     position: relative;
     border-bottom: none !important;
-}#galeria h2 {
+}
+
+#galeria h2 {
     font-family: var(--font-cursive);
     font-size: 3.2rem;
     color: var(--gold);
@@ -1187,15 +1180,16 @@ section {
 #btn-upload {
     margin-bottom: 35px;
     padding: 14px 35px;
-    background-color: rgba(45, 55, 72, 0.65);
-    color: #ffffff;
+    /* background-color: rgba(72, 69, 45, 0.65); */
+    background-color: #444444;
+    color: #FFC857;
     border: 1.5px solid rgba(255, 255, 255, 0.2);
     border-radius: 30px;
     font-family: var(--font-body);
     font-weight: 500;
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.5x;
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(8px);
@@ -1211,10 +1205,14 @@ section {
     transform: translateY(-2px);
 }
 
+.fa-camera {
+    margin-right: 5px;
+}
+
 .camera-icon {
     margin-right: 8px;
     font-size: 1rem;
-    color: var(--gold);
+    color: #b88328;
 }
 
 .gallery-carousel-container {
@@ -1452,7 +1450,7 @@ section {
 footer {
     text-align: center;
     padding: 45px 20px;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: #cbd5e1;
     background-color: #030712;
     font-family: var(--font-body);
@@ -1538,9 +1536,10 @@ footer {
 
     .welcome-text {
         text-align: center;
-        font-size: 0.88rem !important;
+        font-size: 0.78rem !important;
         line-height: 1.5 !important;
-        letter-spacing: 0.5px !important;
+        letter-spacing: 0.10px !important;
+        max-width: 350px;
     }
 
     .localizacao-card {
@@ -1556,9 +1555,9 @@ footer {
     }
 
     .card-address {
-        font-size: 0.85rem !important;
-        letter-spacing: 0.8px !important;
-        line-height: 1.4 !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 0.10px !important;
+        line-height: 1.6 !important;
     }
 
     .container-text-image {
